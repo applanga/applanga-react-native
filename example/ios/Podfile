@@ -1,0 +1,44 @@
+platform :ios, '9.0'
+plugin 'cocoapods-fix-react-native'
+
+def myPods
+  use_frameworks!
+  
+  pod 'ApplangaReactNative', :path => '../node_modules/applanga-react-native/ios/ApplangaReactNative.podspec'
+  pod 'Applanga', '>= 2.0.107'
+  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/yoga.podspec'
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'React', path: '../node_modules/react-native', subspecs: [
+    'Core',
+    'jschelpers',
+    'cxxreact',
+    'CxxBridge',
+    'DevSupport',
+    'RCTText',
+    'RCTImage',
+    'RCTNetwork',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTWebSocket'
+  ]
+  pod 'RNI18n', :path => '../node_modules/react-native-i18n'
+
+end
+
+target 'example' do
+    myPods
+end
+
+target 'exampleTests' do
+    myPods
+end
+
+target 'example-tvOS' do
+    myPods
+end
+
+target 'example-tvOSTests' do
+    myPods
+end

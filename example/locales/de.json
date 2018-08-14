@@ -1,0 +1,8 @@
+{
+    "hello_world": "Hallo Welt",
+    "update_applanga": "Update all deine Strings und erstelle das View neu",
+    "welcome": "Willkommen zu React Native mit Applanga!",
+    "instructions": "Um zu starten, ändere App.js",
+    "instructions_android": "Drücke zweimal R auf deiner Tastatur zum neuladen,\nschüttel oder drücke Menü für das Entwickler-Menü",
+    "instructions_ios": "Drücke Cmd+R zum neuladen,\nCmd+D oder schütteln für das Entwickler-Menü",
+}

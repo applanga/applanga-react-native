@@ -1,0 +1,34 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+xcuserdata
+*.xccheckout
+*.hmap
+*.ipa
+*.xcuserstate
+*.xcworkspace
+xcshareddata
+# Android/IJ
+#
+.idea
+*.iml
+.gradle
+local.properties
+example/android/app/src/main/gen/
+src/android/src/main/gen/
+
+# node.js
+#
+node_modules/
+npm-debug.log
+Pods/
+build/
+lib/
+
+# Applanga
+applanga_settings.applanga

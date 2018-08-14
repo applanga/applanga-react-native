@@ -1,0 +1,18 @@
+{
+  "name": "applanga-react-native",
+  "version": "0.0.1",
+  "description": "Applanga's SDK for React-Native",
+  "homepage": "https://github.com/applanga/applanga-react-native",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "Android",
+    "iOS",
+    "React-Native",
+    "Localization",
+    "Translation"
+  ],
+  "author": "Applanga",
+  "license": "MIT"
+}
