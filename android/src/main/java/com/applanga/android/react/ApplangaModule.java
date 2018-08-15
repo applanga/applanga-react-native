@@ -24,8 +24,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+import android.app.Activity;
+ 
 public class ApplangaModule extends ReactContextBaseJavaModule {
+    private static String TAG = "applanga";
     
     public ApplangaModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -36,39 +38,66 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
         return "Applanga";
     }
     
-    public static boolean applangaInitialised = false;
+    private static boolean applangaInitialised = false;
     
-    public void applangaInit(){
-        Applanga.init(getCurrentActivity());
+    private void applangaInit(){
+        Activity activity = getCurrentActivity();
+        if(activity == null) return;
+        Applanga.init(activity);
         applangaInitialised = true;
     }
 
     @ReactMethod
-    public void getString(String s, String d, Promise promise){
-        if(!applangaInitialised){
-            applangaInit();
+    public void setLanguage(String lang, Promise promise){
+        try {
+            if(!applangaInitialised){
+                applangaInit();
+            }
+            promise.resolve(Applanga.setLanguage(lang));          
+        } catch(Exception error) {
+            promise.reject(TAG, error.getMessage(), error);  
         }
-        promise.resolve(Applanga.getString(s, d));
     }
+
+    @ReactMethod
+    public void getString(String s, String d, Promise promise){
+        try {
+            if(!applangaInitialised){
+                applangaInit();
+            }
+            promise.resolve(Applanga.getString(s, d));
+        } catch(Exception error) {
+            promise.reject(TAG, error.getMessage(), error);  
+        }
+    }
+
     @ReactMethod
     public void update(final Promise promise){
-        if(!applangaInitialised){
-            applangaInit();
-        }
-        Applanga.update(new ApplangaCallback() {
-            @Override
-            public void onLocalizeFinished(boolean b) {
-               promise.resolve(b);
+        try {
+            if(!applangaInitialised){
+                applangaInit();
             }
-        });
+            Applanga.update(new ApplangaCallback() {
+                @Override
+                public void onLocalizeFinished(boolean b) {
+                promise.resolve(b);
+                }
+            });
+        } catch(Exception error) {
+            promise.reject(TAG, error.getMessage(), error);  
+        }
     }
     
     @ReactMethod
     public void localizeMap(ReadableMap map, Promise promise){   
-        if(!applangaInitialised){
-            applangaInit();
+        try {
+            if(!applangaInitialised){
+                applangaInit();
+            }
+            promise.resolve(toWritableMap(Applanga.localizeMap(toHashMap(map))));
+        } catch(Exception error) {
+            promise.reject(TAG, error.getMessage(), error);  
         }
-        promise.resolve(toWritableMap(Applanga.localizeMap(toHashMap(map))));
     }
     
     private static HashMap<String, HashMap<String, String>> toHashMap(ReadableMap map){
@@ -90,10 +119,10 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
             }
             hashMap.put(lang, langHashMap);
         }
-        return hashMap;
+        return hashMap; 
     }
     
-    public static WritableMap toWritableMap(HashMap<String, HashMap<String, String>> map) {
+    private static WritableMap toWritableMap(HashMap<String, HashMap<String, String>> map) {       
         WritableMap writableMap = Arguments.createMap();
     
         for(Map.Entry<String, HashMap<String,String>> lang : map.entrySet()){

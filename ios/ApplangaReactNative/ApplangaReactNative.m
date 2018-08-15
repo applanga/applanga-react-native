@@ -92,4 +92,11 @@ RCT_REMAP_METHOD(update,
     }];
 }
 
+RCT_REMAP_METHOD(setLanguage,
+                 lang: (NSString *)lang
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject){
+    resolve([Applanga setLanguage:lang]);
+}
+
 @end
