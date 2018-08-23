@@ -29,6 +29,8 @@
 
 + (void)updateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
 
++ (BOOL)setLanguage:(NSString*)language;
+
 @end
 
 //#endif
@@ -96,7 +98,8 @@ RCT_REMAP_METHOD(setLanguage,
                  lang: (NSString *)lang
                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject){
-    resolve([Applanga setLanguage:lang]);
+    NSNumber *result = [NSNumber numberWithBool:([Applanga setLanguage:lang])];
+    resolve(result);
 }
 
 @end
