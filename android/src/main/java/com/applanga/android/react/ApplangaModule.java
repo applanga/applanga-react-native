@@ -94,6 +94,10 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
             if(!applangaInitialised){
                 applangaInit();
             }
+            if(!applangaInitialised){
+                promise.resolve(toWritableMap(toHashMap(map)));
+                return;
+            }
             promise.resolve(toWritableMap(Applanga.localizeMap(toHashMap(map))));
         } catch(Exception error) {
             promise.reject(TAG, error.getMessage(), error);  
