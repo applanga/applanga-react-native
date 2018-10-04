@@ -29,30 +29,19 @@ import android.app.Activity;
 public class ApplangaModule extends ReactContextBaseJavaModule {
     private static String TAG = "applanga";
     
-    public ApplangaModule(ReactApplicationContext reactContext) {
-        super(reactContext);
+    public ApplangaModule(ReactApplicationContext context) {
+        super(context);
+        Applanga.init(context);
     }
-    
+
     @Override
     public String getName() {
         return "Applanga";
-    }
-    
-    private static boolean applangaInitialised = false;
-    
-    private void applangaInit(){
-        Activity activity = getCurrentActivity();
-        if(activity == null) return;
-        Applanga.init(activity);
-        applangaInitialised = true;
     }
 
     @ReactMethod
     public void setLanguage(String lang, Promise promise){
         try {
-            if(!applangaInitialised){
-                applangaInit();
-            }
             promise.resolve(Applanga.setLanguage(lang));          
         } catch(Exception error) {
             promise.reject(TAG, error.getMessage(), error);  
@@ -62,9 +51,6 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getString(String s, String d, Promise promise){
         try {
-            if(!applangaInitialised){
-                applangaInit();
-            }
             promise.resolve(Applanga.getString(s, d));
         } catch(Exception error) {
             promise.reject(TAG, error.getMessage(), error);  
@@ -74,13 +60,10 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void update(final Promise promise){
         try {
-            if(!applangaInitialised){
-                applangaInit();
-            }
             Applanga.update(new ApplangaCallback() {
                 @Override
-                public void onLocalizeFinished(boolean b) {
-                promise.resolve(b);
+                public void onLocalizeFinished(boolean succeeded) {
+                    promise.resolve(succeeded);
                 }
             });
         } catch(Exception error) {
@@ -91,9 +74,6 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void localizeMap(ReadableMap map, Promise promise){   
         try {
-            if(!applangaInitialised){
-                applangaInit();
-            }
             promise.resolve(toWritableMap(Applanga.localizeMap(toHashMap(map))));
         } catch(Exception error) {
             promise.reject(TAG, error.getMessage(), error);  
