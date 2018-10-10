@@ -151,7 +151,7 @@ repositories {
 
 dependencies {
     compile project(':react-native-i18n')
-    compile 'com.applanga.android:Applanga:2.0.93'
+    compile 'com.applanga.android:Applanga:2.0.95'
     compile project(':applanga-react-native')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

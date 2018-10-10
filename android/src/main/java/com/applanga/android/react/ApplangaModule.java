@@ -1,11 +1,7 @@
 package com.applanga.android.react;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import com.applanga.android.ApplangaCallback;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -13,19 +9,13 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
 
 import com.applanga.android.Applanga;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import android.app.Activity;
- 
+
 public class ApplangaModule extends ReactContextBaseJavaModule {
     private static String TAG = "applanga";
     
@@ -37,6 +27,16 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "Applanga";
+    }
+    
+    @ReactMethod
+    public void showDraftModeDialog(final Promise promise){
+        try{
+            Applanga.showDraftModeDialog(getCurrentActivity());
+            promise.resolve(null);
+        } catch (Exception error){
+            promise.reject(error);
+        }
     }
 
     @ReactMethod
