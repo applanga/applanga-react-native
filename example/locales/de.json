@@ -1,5 +1,6 @@
 {
     "hello_world": "Hallo Welt",
+    "show_draft_mode_dialog": "Zeige den Draft-Mode-Dialog",
     "update_applanga": "Update all deine Strings und erstelle das View neu",
     "welcome": "Willkommen zu React Native mit Applanga!",
     "instructions": "Um zu starten, ändere App.js",

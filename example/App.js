@@ -44,6 +44,10 @@ export default class App extends Component<Props> {
     });
   }
 
+  async showDraftModeDialog(){
+    Applanga.showDraftModeDialog();
+  }
+
   render() {
     if( ! this.state.applangaInitialized){
       return (
@@ -65,6 +69,12 @@ export default class App extends Component<Props> {
           <Button
             onPress={this.helloApplanga}
             title={strings("hello_world")}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            onPress={this.showDraftModeDialog}
+            title={strings("show_draft_mode_dialog")}
           />
         </View>
         <Text style={styles.welcome}>{strings("welcome")}</Text>
