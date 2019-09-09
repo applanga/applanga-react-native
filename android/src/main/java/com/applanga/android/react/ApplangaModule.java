@@ -40,6 +40,36 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void showScreenShotMenu(final Promise promise){
+        try{
+            getCurrentActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Applanga.setScreenShotMenuVisible(true);
+                }
+            });
+            promise.resolve(null);
+        } catch (Exception error){
+            promise.reject(error);
+        }
+    }
+
+    @ReactMethod
+    public void hideScreenShotMenu(final Promise promise){
+        try{
+            getCurrentActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Applanga.setScreenShotMenuVisible(false);
+                }
+            });
+            promise.resolve(null);
+        } catch (Exception error){
+            promise.reject(error);
+        }
+    }
+
+    @ReactMethod
     public void setLanguage(String lang, Promise promise){
         try {
             promise.resolve(Applanga.setLanguage(lang));          
