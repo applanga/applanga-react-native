@@ -11,15 +11,15 @@
 
 
 /*#if __has_include(<Applanga/Applanga.h>)
-#import <Applanga/Applanga.h>
-#elif __has_include(<Applanga.h>)
-#import <Applanga.h>
-#elif __has_include("Applanga/Applanga.h")
-#import "Applanga/Applanga.h"
-#elif __has_include("Applanga.h")
-#import "Applanga.h"
-#else
-*/
+ #import <Applanga/Applanga.h>
+ #elif __has_include(<Applanga.h>)
+ #import <Applanga.h>
+ #elif __has_include("Applanga/Applanga.h")
+ #import "Applanga/Applanga.h"
+ #elif __has_include("Applanga.h")
+ #import "Applanga.h"
+ #else
+ */
 //no include found we just redeclare what we need and let the linker do the rest
 @interface Applanga : NSObject
 
@@ -28,6 +28,9 @@
 + (NSDictionary*) localizeMap:(NSDictionary*)map;
 
 + (void)updateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
+
++ (void)showDraftModeDialog;
++ (BOOL)setScreenShotMenuVisible:(BOOL)visible;
 
 + (BOOL)setLanguage:(NSString*)language;
 
@@ -89,7 +92,7 @@ RCT_REMAP_METHOD(update,
 {
     [Applanga updateWithCompletionHandler:^(BOOL success) {
         NSNumber *result=[NSNumber numberWithBool:success];
-
+        
         resolve(result);
     }];
 }
@@ -100,6 +103,25 @@ RCT_REMAP_METHOD(setLanguage,
                  rejecter:(RCTPromiseRejectBlock)reject){
     NSNumber *result = [NSNumber numberWithBool:([Applanga setLanguage:lang])];
     resolve(result);
+}
+
+
+
+
+RCT_EXPORT_METHOD(showDraftModeDialog)
+{
+    [Applanga showDraftModeDialog];
+}
+
+RCT_EXPORT_METHOD(showScreenShotMenu)
+{
+    [Applanga setScreenShotMenuVisible:true];
+}
+
+RCT_EXPORT_METHOD(hideScreenShotMenu)
+{
+    [Applanga setScreenShotMenuVisible:false];
+    
 }
 
 @end
