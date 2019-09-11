@@ -44,9 +44,9 @@ Add the *Applanga Settings File* to your apps resources. It will be automaticall
  - `npm install applanga-react-native --save`
  - `react-native link applanga-react-native`
 
-For iOS, Add `pod 'ApplangaReactNative', :path => '../node_modules/applanga-react-native/ios/ApplangaReactNative.podspec'` to your podfile dependancies
+For iOS, Add `pod 'ApplangaReactNative', :path => '../node_modules/applanga-react-native/ios/ApplangaReactNative.podspec'` to your podfile dependencies
 
-Then run podinstall again
+Then run pod install again
 
 
 ### 3. Usage
