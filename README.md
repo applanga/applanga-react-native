@@ -82,6 +82,12 @@ Applanga.localizeMap(
 
 `Applanga.localizeMap(map)` returns the same map but with the actual Applanga localizations.
 
+##### Applanga.showDraftModeDialog()
+Show the applanga draft mode activation popup
+
+##### Applanga.showScreenShotMenu() & Applanga.hideScreenShotMenu()
+Show and hide the applanga screenshot and tag picker popup
+
 #### 3.3 String Upload
 Strings from `Applanga.getString(String, String)` and Strings which are located in the map of `Applanga.localizeMap(map)`, will be uploaded if the app is in debug mode and fulfill one of the two points: They are non existent on the Applanga Dashboard or the target text is empty.
 ##### Debug mode for iOS
