@@ -3,22 +3,51 @@
 A React Native library for Applanga
 
 ## Installation
-### 1. Add Applanga to your Project
-- First, set up Applanga in your app as instructed on [applanga.com](https://www.applanga.com/docs-integration). This includes setting up the Applanga-SDK and the Applanga Settings File, for both *Android* and *iOS*.
+### 1. Add the Applanga native SDKs to your Project
+
+#### Android
+
+1. Download the *Applanga Settings File* for your app from the Applanga App Overview by clicking the ***[Prepare Release]*** button and then clicking ***[Get Settings File]***. 
+
+Add the *Applanga Settings File* to your android resources res/raw directory
+
+2. Add the following to your build.gradle file
+
+```gradle
+    repositories {
+        maven { url 'https://raw.github.com/applanga/sdk-android/master/maven/releases/'}
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        implementation 'com.applanga.android:Applanga:3.0.1'
+    }
+```
+
+3. Add the permission **android.permission.INTERNET** in your **AndroidManifest.xml** file to allow your App internet access, which is needed for Applanga to function.
+
+    ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    ```
+
+#### iOS
+
+1. Download the *Applanga Settings File* for your app from the App Overview in the dashboard by clicking the ***[Prepare Release]*** button and then clicking ***[Get Settings File]***.
+ 
+Add the *Applanga Settings File* to your apps resources. It will be automatically loaded.
+
+2. insert this line of code: `pod 'Applanga'` to your iOS podfile
+
+3. Once you have done so, re-run **pod install** from the command line.
 
 ### 2. Add applanga-react-native
 
  - `npm install applanga-react-native --save`
  - `react-native link applanga-react-native`
- 
-### iOS with CocoaPods support
-`react-native link applanga-react-native` automatically inserts `pod 'Applanga'` to your Podfile. To be more correct, replace it with `pod 'Applanga', '>= 2.0.107'`.
 
- 1. `bundle install` to install *cocoapods-fix-react-native*
- 2. `cd ios && pod install`
- - On top of the Podfile put the following line:
- `plugin 'cocoapods-fix-react-native'`
- - `pod install` again
+For iOS, Add `pod 'ApplangaReactNative', :path => '../node_modules/applanga-react-native/ios/ApplangaReactNative.podspec'` to your podfile dependancies
+
+Then run podinstall again
+
 
 ### 3. Usage
 
