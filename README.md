@@ -19,7 +19,7 @@ Add the *Applanga Settings File* to your android resources res/raw directory
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        implementation 'com.applanga.android:Applanga:3.0.1'
+        implementation 'com.applanga.android:Applanga:3.0.114'
     }
 ```
 
