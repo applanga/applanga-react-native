@@ -11,7 +11,9 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme">
 
-       
+        <meta-data
+            android:name="ApplangaLogLevel"
+            android:value="v" />
 
       <activity
         android:name=".MainActivity"

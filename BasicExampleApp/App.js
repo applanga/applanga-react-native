@@ -66,13 +66,9 @@ export default class App extends Component {
 		          	onPress={() => Applanga.showDraftModeDialog()}
 		        />
 		        <Button
-		          	title="Show Screen Shot Menu"
-		          	onPress={() => Applanga.showScreenShotMenu()}
+		          	title="Switch To French"
+		          	onPress={() => Applanga.setLanguage('fr')}
 		        />
-		        <Button
-		          	title="Hide Screen Shot Menu"
-		          	onPress={() => Applanga.hideScreenShotMenu()}
-		        />         
       		</View>
       	);
 		}
@@ -96,7 +92,7 @@ export default class App extends Component {
 	    result = await Applanga.localizeMap(
 			{
 				"en": {
-					"title_test": "this is the original title text",
+					"title_test": "this is the original title text"
 				}
 			})
 	  } catch (e) {
