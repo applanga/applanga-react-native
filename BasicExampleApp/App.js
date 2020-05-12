@@ -37,20 +37,26 @@ export default class App extends Component {
 
 	constructor(){
 		super();
-
-		console.log("Applanga Starting init");
-		
 		this.state = {
       		applangaInitialized: false,
       		recreateViews:true,
 		}
 		
 		applangaInit(() =>{
-				Applanga.getString("title_test","default").then((data) => {
+				Applanga.getString("test","default").then((data) => {
 				this.titleText = data;
 				this.setState({applangaInitialized: true});
 		    });
     	});
+	}
+
+	swapLanguageTest()
+	{
+		Applanga.setLanguage('fr')
+		Applanga.getString("test","default").then((data) => {
+			this.titleText = data;
+			this.setState({applangaInitialized: true});
+	    });
 	}
  
   	render() {
@@ -67,7 +73,7 @@ export default class App extends Component {
 		        />
 		        <Button
 		          	title="Switch To French"
-		          	onPress={() => Applanga.setLanguage('fr')}
+		          	onPress={() => this.swapLanguageTest()}
 		        />
       		</View>
       	);
@@ -92,7 +98,10 @@ export default class App extends Component {
 	    result = await Applanga.localizeMap(
 			{
 				"en": {
-					"title_test": "this is the original title text"
+					"test": "local english"
+				},
+				"fr": {
+					"test": "local french"
 				}
 			})
 	  } catch (e) {
