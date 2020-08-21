@@ -50,12 +50,13 @@ export default class App extends Component {
     	});
 	}
 
-	swapLanguageTest()
+	async swapLanguageTest(callback)
 	{
 		Applanga.setLanguage('fr')
+		await Applanga.update()
 		Applanga.getString("test","default").then((data) => {
 			this.titleText = data;
-			this.setState({applangaInitialized: true});
+			this.setState({applangaInitialized: true})
 	    });
 	}
  
