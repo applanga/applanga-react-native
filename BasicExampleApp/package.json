@@ -10,11 +10,12 @@
     "applanga-react-native": "file:../applanga-react-native-0.0.12.tgz",
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-i18n": "^2.0.15",
     "react-native-restart": "0.0.17"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.0",
-    "@babel/runtime": "^7.5.0",
+    "@babel/core": "^7.11.4",
+    "@babel/runtime": "^7.11.2",
     "@react-native-community/eslint-config": "^0.0.3",
     "babel-jest": "^24.1.0",
     "jest": "^24.1.0",

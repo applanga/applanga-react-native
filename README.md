@@ -51,6 +51,11 @@ Then run pod install again
 
 ## Usage
 
+#### 0. The Example app
+
+In this repo you will find an example app named 'BasicExampleApp'. In this app you will find examples of all techniques explained below. We reccomend taking a look, particularly at the string file mapping and init process, before you start using the plugin in your own project. 
+
+
 #### 1. Understanding the flow of the ApplangaSDK
 
 The applanga_settings.applanga file, that you added to your app earlier in this process, contains all the languages and translations that are present in the Applanga dashboard at the time you download the file. This data is then entered into a database on the device.
@@ -74,26 +79,28 @@ This fetches changes from the dashboard (of the current app language and the bas
 
 Before the translations can be accessed you must init the ApplangaSDK by calling `Applanga.update()`.
 
-Here is an example function that you could copy and use to handle init, and also mapping translations (See the Localize a Map section below for more info).
+Here is an example function that you could copy and use to handle init, and also for mapping translations (See the Localize a Map section below for more info).
 
 ```
+var en = require('./strings/en.json');
+var de = require('./strings/de.json');
+
+var localisedMap;
+
 async function applangaInit(callback){
-	var result;
 	try{
-		await Applanga.update()
-		result = await Applanga.localizeMap(
-		{
-			"en": {
-				"hello_world": "Hello World"
-			}, 
-			"de" : {
-				"hello_world": "Hallo Welt"
-			}
-		})
-	} catch (e) {
-		console.error(e);
-	}
-		callback(result);
+      await Applanga.update()
+      localisedMap = await Applanga.localizeMap(
+        {
+            "en": en,
+            "de": de
+        })
+        console.log("Localise map complete")
+        console.log(localisedMap)
+    } catch (e) {
+      console.error(e);
+    }
+    callback()
 }
 ```
  
@@ -105,7 +112,7 @@ You can get the localised value of a string Using the following method:
 
 If *string\_key* does not exists, *default\_message* gets uploaded to the applanga dashboard (See the Debug String Upload section of this doc for more info regarding string upload).
 
-As this call is async, it might not always be convinient, so we advise localising a map(json object), as explained in the next section.
+As this call is async, it might not always be convinient, so we advise localising a map(json object), as explained in the next section. Check the BasicExampleApp in this repo for a good example of this.
 
 
 #### 5. Localize a Map
@@ -129,6 +136,8 @@ Applanga.localizeMap(
 
 `Applanga.localizeMap(map)` returns the same map but with the actual Applanga localizations. 
 
+Check our ExampleApp included in this repo to see a clear and simple example of using localizeMap to translate all strings on startup and make them accessable syncronously.
+
 #### 6. Set Language
 
 By Default, the ApplangaSDK will use the devices current language. But if you wish to you can set the language manually using the Set Language method.
@@ -138,17 +147,19 @@ By Default, the ApplangaSDK will use the devices current language. But if you wi
 If you want to make sure that you have the very latest changes from the dashboard, then you should call `Applanga.update();` after setting the language as this will pull all the latest changes for the newly selected language.
 
 
-#### 7. Draft Mode
+#### 7. Draft Mode & Localisation Screenshots
 
-To show the applanga draft mode and screen shot menus you can either use the following methods, or follow the native documentation for each platform to implement showing the menues using gestures.
+To show the applanga [draft mode](https://www.applanga.com/docs/translation-management-dashboard/draft_on-device-testing) and screen shot menus you can either use the following methods, or follow the native documentation for each platform to implement showing the menues using gestures.
+
+Show the applanga draft mode activation popup:
 
 ##### Applanga.showDraftModeDialog()
 
-Show the applanga draft mode activation popup
+Show and hide the applanga screenshot and tag picker popup (Draft mode must be active for these menus to appear):
 
 ##### Applanga.showScreenShotMenu() & Applanga.hideScreenShotMenu()
 
-Show and hide the applanga screenshot and tag picker popup
+You can read more about tags here : [Manage Tags](https://applanga.com/docs#manage_tags) and about screenshots here: 	[Uploading screenshots](https://applanga.com/docs#uploading_screenshots).
 
 #### 8. Debug String Upload
 

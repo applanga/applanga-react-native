@@ -1,14 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {Alert, Platform, StyleSheet, Text, View, Button, NativeModules, ActivityIndicator} from 'react-native';
 import {Applanga} from 'applanga-react-native';
+import {initLocalisations,getString} from './LocalisationManager.js';
 
 const styles = StyleSheet.create({
 
@@ -42,24 +35,15 @@ export default class App extends Component {
       		recreateViews:true,
 		}
 		
-		applangaInit(() =>{
-				Applanga.getString("test","default").then((data) => {
-				this.titleText = data;
-				this.setState({applangaInitialized: true});
-		    });
+		initLocalisations(() =>{
+			this.titleText = getString("test-1")
+			this.showDraftModeText = getString("test-2-draft-mode-show")
+			this.showScreenshotText = getString("test-3-show-screenshot-menu")
+			this.hideScreenshotText = getString("test-4-hide-screenshot-menu")
+			this.setState({applangaInitialized: true});		   
     	});
 	}
 
-	async swapLanguageTest(callback)
-	{
-		Applanga.setLanguage('fr')
-		await Applanga.update()
-		Applanga.getString("test","default").then((data) => {
-			this.titleText = data;
-			this.setState({applangaInitialized: true})
-	    });
-	}
- 
   	render() {
 		if(this.state.applangaInitialized)
 		{
@@ -69,12 +53,16 @@ export default class App extends Component {
           			{this.titleText}
           		</Text>
 		        <Button
-		          	title="Show Draft Menu"
+		          	title={this.showDraftModeText}
 		          	onPress={() => Applanga.showDraftModeDialog()}
 		        />
-		        <Button
-		          	title="Switch To French"
-		          	onPress={() => this.swapLanguageTest()}
+				<Button
+		          	title={this.showScreenshotText}
+		          	onPress={() => Applanga.showScreenShotMenu()}
+		        />
+				<Button
+		          	title={this.hideScreenshotText}
+		          	onPress={() => Applanga.hideScreenShotMenu()}
 		        />
       		</View>
       	);
@@ -91,26 +79,3 @@ export default class App extends Component {
 		}
   	}
 }
-
-	async function applangaInit(callback){
-	  var result;
-	  try{
-	    await Applanga.update()
-	    result = await Applanga.localizeMap(
-			{
-				"en": {
-					"test": "local english"
-				},
-				"fr": {
-					"test": "local french"
-				}
-			})
-	  } catch (e) {
-	    console.error(e);
-	  }
-	  callback(result);
-	}
-
-
-
-
