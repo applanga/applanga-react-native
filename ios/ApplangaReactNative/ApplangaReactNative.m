@@ -27,6 +27,9 @@
 
 + (NSDictionary*) localizeMap:(NSDictionary*)map;
 
++ (NSDictionary*) localizedStringsForCurrentLanguage;
+
+
 + (void)updateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
 
 + (void)showDraftModeDialog;
@@ -84,6 +87,13 @@ RCT_REMAP_METHOD(localizeMap,
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
     resolve([Applanga localizeMap: map]);
+}
+
+RCT_REMAP_METHOD(localizedStringsForCurrentLanguage,
+                 findEventsWthResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    resolve([Applanga localizedStringsForCurrentLanguage]);
 }
 
 RCT_REMAP_METHOD(update,
