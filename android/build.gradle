@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 26
-  buildToolsVersion "26.0.1"
+  compileSdkVersion 29
+  buildToolsVersion "29.0.3"
   publishNonDefault true
 
   defaultConfig {
     minSdkVersion 16
-    targetSdkVersion 26
+    targetSdkVersion 29
   }
 
   lintOptions {
@@ -21,13 +21,11 @@ android {
 }
 
 repositories {
-    maven {
-        url 'https://raw.github.com/applanga/sdk-android/master/maven/releases/'
-    }
+    maven { url 'https://maven.applanga.com/'}
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-  provided "com.facebook.react:react-native:+"
-  provided "com.applanga.android:Applanga:3.0.+"
+  compileOnly "com.facebook.react:react-native:+"
+  compileOnly "com.applanga.android:Applanga:3.0.+"
 }

@@ -100,7 +100,26 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
             promise.reject(TAG, error.getMessage(), error);  
         }
     }
-    
+
+
+     @ReactMethod
+    public void localizedStringsForCurrentLanguage(Promise promise){
+
+        try {
+            Map<String,String> map = Applanga.localizedStringsForCurrentLanguage();
+            Iterator it = map.keySet().iterator();
+            WritableMap writableMap = Arguments.createMap();
+            while(it.hasNext()){
+                String key = it.next().toString();
+                String value = map.get(key);
+                writableMap.putString(key, value);
+            }
+            promise.resolve(writableMap);
+        } catch(Exception error) {
+            promise.reject(TAG, error.getMessage(), error);
+        }
+    }
+
     @ReactMethod
     public void localizeMap(ReadableMap map, Promise promise){   
         try {

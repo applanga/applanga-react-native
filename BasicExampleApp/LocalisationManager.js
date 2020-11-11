@@ -21,6 +21,11 @@ async function initLocalisations(callback){
     } catch (e) {
       console.error(e);
     }
+
+
+var testMap = await Applanga.localizedStringsForCurrentLanguage()
+console.log("testMap: " + JSON.stringify(testMap))
+
     callback()
 }
 

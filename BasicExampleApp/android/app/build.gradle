@@ -188,13 +188,20 @@ android {
     }
 }
 repositories {
-    maven { url 'https://maven.applanga.com/'}
-    maven { url 'https://jitpack.io' }
+
+    //maven { url 'https://maven.applanga.com/'}
+    //maven { url 'https://jitpack.io' }
+
+    def releaseRepositoryPath = file('/Users/richard/Documents/ApplangaSDK/sdk/android/sdk-android/maven/releases')
+    maven {
+        url "file://${releaseRepositoryPath.absolutePath}"
+    }
+
 }
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation 'com.applanga.android:Applanga:3.0.134'
+    implementation 'com.applanga.android:Applanga:3.0.999'
 
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/"
