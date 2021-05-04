@@ -25,6 +25,8 @@
 
 + (NSString*)localizedStringForKey:(NSString*)key withDefaultValue:(NSString*)value;
 
++ (NSString*)localizedStringForKey:(NSString*)key withDefaultValue:(NSString*)value andArguments:(NSDictionary*)arguments;
+
 + (NSDictionary*) localizeMap:(NSDictionary*)map;
 
 + (NSDictionary*) localizedStringsForCurrentLanguage;
@@ -81,6 +83,15 @@ RCT_REMAP_METHOD(getString,
     resolve([Applanga localizedStringForKey:key withDefaultValue:value]);
 }
 
+RCT_REMAP_METHOD(getStringWithArguments,
+                 key: (NSString *)key
+                 withDefaultValue: (NSString *) value
+                 andArguments:(NSDictionary*)arguments
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject){
+    resolve([Applanga localizedStringForKey:key withDefaultValue:value andArguments:arguments]);
+}
+
 RCT_REMAP_METHOD(localizeMap,
                  map:(NSDictionary *)map
                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
@@ -120,7 +131,9 @@ RCT_REMAP_METHOD(setLanguage,
 
 RCT_EXPORT_METHOD(showDraftModeDialog)
 {
-    [Applanga showDraftModeDialog];
+     dispatch_sync(dispatch_get_main_queue(), ^{
+        [Applanga showDraftModeDialog];
+    });
 }
 
 RCT_EXPORT_METHOD(showScreenShotMenu)
