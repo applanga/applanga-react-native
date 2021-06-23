@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, Platform, StyleSheet, Text, View, Button, NativeModules, ActivityIndicator} from 'react-native';
 import {Applanga} from 'applanga-react-native';
-import {initLocalisations,getString} from './LocalisationManager.js';
+import {initLocalisations,getString, getStringWithArgumentsAsync} from './LocalisationManager.js';
 
 const styles = StyleSheet.create({
 
@@ -35,11 +35,13 @@ export default class App extends Component {
       		recreateViews:true,
 		}
 		
-		initLocalisations(() =>{
+		initLocalisations(async () =>{
 			this.titleText = getString("test-1")
 			this.showDraftModeText = getString("test-2-draft-mode-show")
 			this.showScreenshotText = getString("test-3-show-screenshot-menu")
 			this.hideScreenshotText = getString("test-4-hide-screenshot-menu")
+            this.stringWithArgsText = await getStringWithArgumentsAsync("test-5-string-with-args", "empty", 
+            {"firstName":"John", "lastName": "Doe"})
 			this.setState({applangaInitialized: true});		   
     	});
 	}
@@ -64,6 +66,9 @@ export default class App extends Component {
 		          	title={this.hideScreenshotText}
 		          	onPress={() => Applanga.hideScreenShotMenu()}
 		        />
+                <Text style = {styles.titleText}>
+                    {this.stringWithArgsText}
+                </Text>
       		</View>
       	);
 		}
