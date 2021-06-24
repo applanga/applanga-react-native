@@ -114,8 +114,32 @@ If *string\_key* does not exists, *default\_message* gets uploaded to the applan
 
 As this call is async, it might not always be convinient, so we advise localising a map(json object), as explained in the next section. Check the BasicExampleApp in this repo for a good example of this.
 
+#### 5. Get a String with arguments (New)
 
-#### 5. Localize a Map
+You can get the localised value of a string with his arguments using the following method:
+
+`async getStringWithArgumentsAsync("string\key", "default\_message",{"argumentName":"argumentValue"})`
+
+Example:
+
+```
+this.greetingsText = await getStringWithArgumentsAsync("greetingskey", "Hello %{userName}",{"userName":"John Doe"})
+```
+and then assign the greetingsText variable to a Text component in React Native
+
+Like so:
+
+```
+<Text style = {styles.greetingText}>
+    {this.greetingsText}
+</Text>
+```
+
+If *string\_key* does not exists, *default\_message* gets uploaded to the applanga dashboard (See the Debug String Upload section of this doc for more info regarding string upload).
+
+
+
+#### 6. Localize a Map
 
 With `async Applanga.localizeMap(map);` you can translate a collection of json objects all in one go. So an optimal setup would be to have the strings for each language in json objects (perhaps in seperate files) and then call Applanga.localizeMap on those objects after applanga has finished initialising. Then after that you can get the translations from those objects immidiatly instead of asynchronously.
 
@@ -138,7 +162,7 @@ Applanga.localizeMap(
 
 Check our ExampleApp included in this repo to see a clear and simple example of using localizeMap to translate all strings on startup and make them accessable syncronously.
 
-#### 6. Set Language
+#### 7. Set Language
 
 By Default, the ApplangaSDK will use the devices current language. But if you wish to you can set the language manually using the Set Language method.
 
@@ -147,7 +171,7 @@ By Default, the ApplangaSDK will use the devices current language. But if you wi
 If you want to make sure that you have the very latest changes from the dashboard, then you should call `Applanga.update();` after setting the language as this will pull all the latest changes for the newly selected language.
 
 
-#### 7. Draft Mode & Localisation Screenshots
+#### 8. Draft Mode & Localisation Screenshots
 
 To show the applanga [draft mode](https://www.applanga.com/docs/translation-management-dashboard/draft_on-device-testing) and screen shot menus you can either use the following methods, or follow the native documentation for each platform to implement showing the menues using gestures.
 
@@ -161,7 +185,7 @@ Show and hide the applanga screenshot and tag picker popup (Draft mode must be a
 
 You can read more about tags here : [Manage Tags](https://applanga.com/docs#manage_tags) and about screenshots here: 	[Uploading screenshots](https://applanga.com/docs#uploading_screenshots).
 
-#### 8. Debug String Upload
+#### 9. Debug String Upload
 
 Strings from `Applanga.getString(String, String)` and Strings which are located in the map of `Applanga.localizeMap(map)`, will be uploaded if the app is in debug mode and fulfill one of the two points: They are non existent on the Applanga Dashboard or the target text is empty.
 ##### Debug mode for iOS
