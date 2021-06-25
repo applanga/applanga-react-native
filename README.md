@@ -7,7 +7,7 @@ A React Native library for Applanga
 
 #### Android
 
-1. Download the *Applanga Settings File* for your app from the Applanga App Overview by clicking the ***[Prepare Release]*** button and then clicking ***[Get Settings File]***. 
+1. Download the *Applanga Settings File* for your app from the Applanga Project Overview by clicking the ***[Prepare Release]*** button and then clicking ***[Get Settings File]***. 
 
 Add the *Applanga Settings File* to your android resources res/raw directory
 
