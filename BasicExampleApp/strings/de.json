@@ -3,5 +3,7 @@
     "test-2-draft-mode-show" : "de-local-test-2",
     "test-3-show-screenshot-menu" : "de-local-test-3",
     "test-4-hide-screenshot-menu" : "de-local-test-4",
-    "test-5-string-with-args" : "Hello %{firstName} %{lastName}"
+    "test-5-string-with-args" : "Hallo %{firstName} %{lastName}",
+    "test-6-enable-show-id-mode": "de-test-6-enable-show-id-mode",
+    "test-7-disable-show-id-mode": "de-test-7-disable-show-id-mode"
 }

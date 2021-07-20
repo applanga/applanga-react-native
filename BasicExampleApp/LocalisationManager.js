@@ -10,24 +10,29 @@ var defaultLanguage = "en"
 
 async function initLocalisations(callback){
     try{
-      await Applanga.update()
-      localisedMap = await Applanga.localizeMap(
-        {
-            "en": en,
-            "de": de
-        })
-        console.log("Localise map complete")
-        console.log(localisedMap)
+      await Applanga.update();
+      await localizeMap();
+      console.log("Localise map complete")
+      //console.log(localisedMap)
     } catch (e) {
       console.error(e);
     }
 
 
-var testMap = await Applanga.localizedStringsForCurrentLanguage()
-console.log("testMap: " + JSON.stringify(testMap))
+    var testMap = await Applanga.localizedStringsForCurrentLanguage()
+    console.log("testMap: " + JSON.stringify(testMap))
 
     callback()
 }
+
+async function localizeMap() {
+    localisedMap = await Applanga.localizeMap(
+        {
+            "en": en,
+            "de": de
+        })
+}
+
 
 async function getStringWithArgumentsAsync(key, value, args){
     return Applanga.getStringWithArguments(key, value, args);
@@ -35,11 +40,11 @@ async function getStringWithArgumentsAsync(key, value, args){
 
 function getString(key)
 {
-    console.log("get string with key: " + key)
+    //console.log("get string with key: " + key)
 
     deviceLocale = I18n.currentLocale().substring(0, 2)
 
-    console.log("device lang: " + deviceLocale)
+    //console.log("device lang: " + deviceLocale)
 
     var lang = localisedMap[deviceLocale]
 
@@ -66,4 +71,4 @@ function getString(key)
     return translation
 }
 
-export {initLocalisations,getString,getStringWithArgumentsAsync};
+export {initLocalisations,getString, localizeMap, getStringWithArgumentsAsync};

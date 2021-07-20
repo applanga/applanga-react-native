@@ -33,6 +33,16 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     public String getName() {
         return "Applanga";
     }
+
+    @ReactMethod
+    public void setShowIdModeEnabled(boolean enabled, final Promise promise){
+        try{
+            Applanga.setShowIdModeEnabled(enabled);
+            promise.resolve(null);
+        } catch (Exception error){
+            promise.reject(error);
+        }
+    }
     
     @ReactMethod
     public void showDraftModeDialog(final Promise promise){

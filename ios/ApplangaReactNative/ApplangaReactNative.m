@@ -34,6 +34,7 @@
 
 + (void)updateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
 
++ (void)setShowIdModeEnabled:(BOOL)enabled;
 + (void)showDraftModeDialog;
 + (BOOL)setScreenShotMenuVisible:(BOOL)visible;
 
@@ -126,8 +127,13 @@ RCT_REMAP_METHOD(setLanguage,
     resolve(result);
 }
 
-
-
+RCT_REMAP_METHOD(setShowIdModeEnabled, 
+                 enabled: (BOOL)enabled
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject){
+    [Applanga setShowIdModeEnabled:enabled];
+    resolve(nil);
+}
 
 RCT_EXPORT_METHOD(showDraftModeDialog)
 {
