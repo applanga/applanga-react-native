@@ -185,6 +185,17 @@ Show and hide the applanga screenshot and tag picker popup (Draft mode must be a
 
 You can read more about tags here : [Manage Tags](https://applanga.com/docs#manage_tags) and about screenshots here: 	[Uploading screenshots](https://applanga.com/docs#uploading_screenshots).
 
+##### Show Id Mode
+
+Enabling the applanga show id mode forces the sdk to return your string ids instead of string values, for all `getString()` or `localizeMap()` calls.
+This should not be used in production. It is especially useful for screenshots - as all strings will be tagged correctly even the dynamic strings and strings set at runtime.
+
+```
+Applanga.setShowIdModeEnabled(true);
+```
+
+After enabling the show id mode you have to call `localizeMap()`  again and you have to refresh your view tree with `setState()`.
+
 #### 9. Debug String Upload
 
 Strings from `Applanga.getString(String, String)` and Strings which are located in the map of `Applanga.localizeMap(map)`, will be uploaded if the app is in debug mode and fulfill one of the two points: They are non existent on the Applanga Dashboard or the target text is empty.
