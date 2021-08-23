@@ -79,6 +79,20 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setLanguageAndUpdate(String lang, Promise promise){
+        try {
+            promise.resolve(Applanga.setLanguageAndUpdate(lang, new ApplangaCallback() {
+                @Override
+                public void onLocalizeFinished(boolean succeeded) {
+                    promise.resolve(succeeded);
+                }
+            }));          
+        } catch(Exception error) {
+            promise.reject(TAG, error.getMessage(), error);  
+        }
+    }
+
+    @ReactMethod
     public void getString(String s, String d, Promise promise){
         try {
             promise.resolve(Applanga.getString(s, d));
