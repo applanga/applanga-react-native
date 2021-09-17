@@ -9,7 +9,7 @@
   "dependencies": {
     "applanga-react-native": "file:../applanga-react-native-0.0.12.tgz",
     "react": "16.13.1",
-    "react-native": "0.63.3",
+    "react-native": "0.64.1",
     "react-native-i18n": "^2.0.15",
     "react-native-restart": "0.0.17"
   },
