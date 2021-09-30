@@ -79,7 +79,7 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setLanguageAndUpdate(String lang, Promise promise){
+    public void setLanguageAndUpdate(String lang, final Promise promise){
         try {
             promise.resolve(Applanga.setLanguageAndUpdate(lang, new ApplangaCallback() {
                 @Override

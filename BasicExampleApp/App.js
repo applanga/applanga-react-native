@@ -40,6 +40,7 @@ export default class App extends Component {
 			this.showDraftModeText = getString("test-2-draft-mode-show")
 			this.showScreenshotText = getString("test-3-show-screenshot-menu")
 			this.hideScreenshotText = getString("test-4-hide-screenshot-menu")
+			this.setLanguageAndUpdate = getString("test-5-set-language-and-update")
 			this.setState({applangaInitialized: true});		   
     	});
 	}
@@ -63,6 +64,10 @@ export default class App extends Component {
 				<Button
 		          	title={this.hideScreenshotText}
 		          	onPress={() => Applanga.hideScreenShotMenu()}
+		        />
+				<Button
+		          	title={this.setLanguageAndUpdate}
+		          	onPress={() => Applanga.setLanguageAndUpdate("en")}
 		        />
       		</View>
       	);

@@ -1,6 +1,6 @@
 PODS:
   - Applanga (2.0.140)
-  - ApplangaReactNative (0.0.12):
+  - ApplangaReactNative (0.0.13):
     - Applanga
     - React
   - boost-for-react-native (1.63.0)
@@ -438,7 +438,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Applanga: 76f4bbd580e33850df0218c05f1f1bf0cc2f1d41
-  ApplangaReactNative: 3f0d6ddd5d1abf82722323dfaeb173d5a46376c9
+  ApplangaReactNative: d71ef8567bafe6b858598648c9ff4310f1384322
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
@@ -482,4 +482,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 85a82b88a27cf8b6fd3f6ef6e168fa398cb900a5
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.10.1

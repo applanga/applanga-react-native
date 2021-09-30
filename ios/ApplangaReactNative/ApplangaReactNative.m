@@ -37,7 +37,7 @@
 
 + (BOOL)setLanguage:(NSString*)language;
 
-+ (BOOL)setLanguageAndUpdate:(NSString*)language withCompletionHandler:(void (^)(BOOL success))completionHandler;
++ (void)setLanguageAndUpdate:(NSString*)language withCompletionHandler:(void (^)(BOOL success))completionHandler;
 
 @end
 

@@ -146,8 +146,12 @@ By Default, the ApplangaSDK will use the devices current language. But if you wi
 
 If you want to make sure that you have the very latest changes from the dashboard, then you should call `Applanga.update();` after setting the language as this will pull all the latest changes for the newly selected language.
 
+#### 7. Set Language and Update (Recommended)
 
-#### 7. Draft Mode & Localisation Screenshots
+This is the recommended option by the Applanga Team. Its combine the Set Language functionality to set the language manually and the Update functionality to get the the very latest changes from the dashboard. To use this method you should call `Applanga.SetLanguageAndUpdate(String Language);`
+
+
+#### 8. Draft Mode & Localisation Screenshots
 
 To show the applanga [draft mode](https://www.applanga.com/docs/translation-management-dashboard/draft_on-device-testing) and screen shot menus you can either use the following methods, or follow the native documentation for each platform to implement showing the menues using gestures.
 
@@ -161,7 +165,7 @@ Show and hide the applanga screenshot and tag picker popup (Draft mode must be a
 
 You can read more about tags here : [Manage Tags](https://applanga.com/docs#manage_tags) and about screenshots here: 	[Uploading screenshots](https://applanga.com/docs#uploading_screenshots).
 
-#### 8. Debug String Upload
+#### 9. Debug String Upload
 
 Strings from `Applanga.getString(String, String)` and Strings which are located in the map of `Applanga.localizeMap(map)`, will be uploaded if the app is in debug mode and fulfill one of the two points: They are non existent on the Applanga Dashboard or the target text is empty.
 ##### Debug mode for iOS
