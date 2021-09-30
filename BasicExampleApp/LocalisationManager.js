@@ -29,6 +29,10 @@ console.log("testMap: " + JSON.stringify(testMap))
     callback()
 }
 
+async function getStringWithArgumentsAsync(key, value, args){
+    return Applanga.getStringWithArguments(key, value, args);
+}
+
 function getString(key)
 {
     console.log("get string with key: " + key)
@@ -62,4 +66,4 @@ function getString(key)
     return translation
 }
 
-export {initLocalisations,getString};
+export {initLocalisations,getString,getStringWithArgumentsAsync};

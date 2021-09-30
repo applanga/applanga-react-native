@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, Platform, StyleSheet, Text, View, Button, NativeModules, ActivityIndicator} from 'react-native';
 import {Applanga} from 'applanga-react-native';
-import {initLocalisations,getString} from './LocalisationManager.js';
+import {initLocalisations,getString, getStringWithArgumentsAsync} from './LocalisationManager.js';
 
 const styles = StyleSheet.create({
 
@@ -35,12 +35,15 @@ export default class App extends Component {
       		recreateViews:true,
 		}
 		
-		initLocalisations(() =>{
+		initLocalisations(async () =>{
 			this.titleText = getString("test-1")
 			this.showDraftModeText = getString("test-2-draft-mode-show")
 			this.showScreenshotText = getString("test-3-show-screenshot-menu")
 			this.hideScreenshotText = getString("test-4-hide-screenshot-menu")
-			this.setLanguageAndUpdate = getString("test-5-set-language-and-update")
+            this.stringWithArgsText = await getStringWithArgumentsAsync("test-5-string-with-args", "empty", 
+            {"firstName":"John", "lastName": "Doe"})
+			this.setLanguageAndUpdate_en = getString("test-6-set-language-and-update")
+			this.setLanguageAndUpdate_de = getString("test-7-set-language-and-update")
 			this.setState({applangaInitialized: true});		   
     	});
 	}
@@ -66,9 +69,16 @@ export default class App extends Component {
 		          	onPress={() => Applanga.hideScreenShotMenu()}
 		        />
 				<Button
-		          	title={this.setLanguageAndUpdate}
+		          	title={this.setLanguageAndUpdate_en}
 		          	onPress={() => Applanga.setLanguageAndUpdate("en")}
 		        />
+				<Button
+		          	title={this.setLanguageAndUpdate_de}
+		          	onPress={() => Applanga.setLanguageAndUpdate("de")}
+		        />
+                <Text style = {styles.titleText}>
+                    {this.stringWithArgsText}
+                </Text>
       		</View>
       	);
 		}

@@ -3,6 +3,8 @@
     "test-2-draft-mode-show" : "en-local-test-2",
     "test-3-show-screenshot-menu" : "en-local-test-3",
     "test-4-hide-screenshot-menu" : "en-local-test-4",
-    "test-5-set-language-and-update" : "en-Set Language and Update"
+    "test-5-string-with-args" : "Hello %{firstName} %{lastName}",
+    "test-6-set-language-and-update": "de-Set Language and Update to EN",
+    "test-7-set-language-and-update" : "de-Set Language and Update to DE"
 
 }
