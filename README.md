@@ -11,7 +11,7 @@ A React Native library for Applanga
 
 Add the *Applanga Settings File* to your android resources res/raw directory
 
-2. Add the following to your build.gradle file
+2. Add the following to your **app** build.gradle file
 
 ```gradle
     repositories {
@@ -19,7 +19,7 @@ Add the *Applanga Settings File* to your android resources res/raw directory
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        implementation 'com.applanga.android:Applanga:3.0.134'
+        implementation 'com.applanga.android:Applanga:3.0.152'
     }
 ```
 
@@ -42,7 +42,7 @@ Add the *Applanga Settings File* to your apps resources. It will be automaticall
 ### 2. Add applanga-react-native
 
  - `npm install applanga-react-native --save`
- - `react-native link applanga-react-native`
+ - `npx react-native link applanga-react-native`
 
 For iOS, Add `pod 'ApplangaReactNative', :path => '../node_modules/applanga-react-native/ios/ApplangaReactNative.podspec'` to your podfile dependencies
 
