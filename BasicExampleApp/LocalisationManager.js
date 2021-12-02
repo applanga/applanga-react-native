@@ -2,68 +2,60 @@ var en = require('./strings/en.json');
 var de = require('./strings/de.json');
 
 import {Applanga} from 'applanga-react-native';
-import I18n from 'react-native-i18n';
 
-var localisedMap;
+// our default language is english here
+var translationMap = en;
 
-var defaultLanguage = "en"
+async function initLocalisations(callback) {
+  try {
+    // call Applanga.localizeMap once so it will upload all new strings
+    // to the applanga dashboard
+    // it only uploads if the debugger is connecter or the draft mode is enabled
+    await Applanga.localizeMap({
+        // add all languages you want to upload here
+        en: en,
+        de: de,
+      });
 
-async function initLocalisations(callback){
-    try{
-      await Applanga.update()
-      localisedMap = await Applanga.localizeMap(
-        {
-            "en": en,
-            "de": de
-        })
-        console.log("Localise map complete")
-        console.log(localisedMap)
-    } catch (e) {
-      console.error(e);
-    }
+    // do an update on app start
+    // it will fetch all new strings from the dashboard
+    // for the current language
+    await Applanga.update();
 
+    // get all strings for the current language into a map
+    // strings which are not translated for the current language
+    // will contain the fallback language (your baselanguage)
+    // IMPORTANT: All strings which are coming back here have to be on the dashboard
+    // if you want to have a local fallback you have to implement it yourself
+    // look at the getString method below for an example
+    translationMap = await Applanga.localizedStringsForCurrentLanguage();
+  } catch (e) {
+    console.error(e);
+  }
 
-var testMap = await Applanga.localizedStringsForCurrentLanguage()
-console.log("testMap: " + JSON.stringify(testMap))
-
-    callback()
+  callback();
 }
 
-async function getStringWithArgumentsAsync(key, value, args){
-    return Applanga.getStringWithArguments(key, value, args);
+// this method only works aynchronously
+async function getStringWithArgumentsAsync(key, value, args) {
+  return Applanga.getStringWithArguments(key, value, args);
 }
 
-function getString(key)
-{
-    console.log("get string with key: " + key)
-
-    deviceLocale = I18n.currentLocale().substring(0, 2)
-
-    console.log("device lang: " + deviceLocale)
-
-    var lang = localisedMap[deviceLocale]
-
-    if(lang == null)
-    {
-        console.log("language not supported: " + deviceLocale)
-        lang = localisedMap[defaultLanguage]
+// get string is a simple wrapper for the translation map
+function getString(key) {
+    var translation = translationMap[key];
+    if((typeof translation === 'undefined') || translation === ""){
+        return en[key]
     }
-
-    console.log("get lang from map")
-
-    console.log(lang)
-
-    var translation = lang[key]
-
-    if(translation == null)
-    {
-        console.log("Key not found: " + key)
-        return "Key not found: " + key
-    }
-
-    console.log("translation: " + translation)
-
     return translation
 }
 
-export {initLocalisations,getString,getStringWithArgumentsAsync};
+// set language set's the language for the applanga sdk
+// and does an update for this language immediately 
+// then it updates our translation map
+async function setLanguage(lang){
+    await Applanga.setLanguageAndUpdate(lang);
+    translationMap = await Applanga.localizedStringsForCurrentLanguage();
+}
+
+export {initLocalisations, setLanguage, getString, getStringWithArgumentsAsync};

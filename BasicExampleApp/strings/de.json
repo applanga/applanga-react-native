@@ -1,9 +1,9 @@
 {
-    "test-1" : "de-local-test-1",
-    "test-2-draft-mode-show" : "de-local-test-2",
-    "test-3-show-screenshot-menu" : "de-local-test-3",
-    "test-4-hide-screenshot-menu" : "de-local-test-4",
-    "test-5-string-with-args" : "Hello %{firstName} %{lastName}",
-    "test-6-set-language-and-update": "de-Set Language and Update to EN",
-    "test-7-set-language-and-update" : "de-Set Language and Update to DE"
+    "test-1" : "Hallo Beispiel",
+    "test-2-draft-mode-show" : "Zeige das Draftmode-Menü",
+    "test-3-show-screenshot-menu" : "Zeige das Screenshot-Menü",
+    "test-4-hide-screenshot-menu" : "Verstecke das Screenshot-Menü",
+    "test-5-string-with-args" : "Hallo %{firstName} %{lastName}",
+    "test-6-set-language-and-update": "Wechsel zu EN",
+    "test-7-set-language-and-update" : "Wechsel zu DE"
 }
