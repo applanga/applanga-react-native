@@ -9,25 +9,15 @@ A React Native library for Applanga
 
 1. Download the *Applanga Settings File* for your app from the Applanga Project Overview by clicking the ***[Prepare Release]*** button and then clicking ***[Get Settings File]***. 
 
-Add the *Applanga Settings File* to your android resources res/raw directory
+Add the *Applanga Settings File* to your android resources res/raw directory.
 
-2. Add the following to your **app** build.gradle file
+2. Add the following to your app/build.gradle file
 
 ```gradle
     repositories {
         maven { url 'https://maven.applanga.com/'}
-        maven { url 'https://jitpack.io' }
-    }
-    dependencies {
-        implementation 'com.applanga.android:Applanga:3.0.152'
     }
 ```
-
-3. Add the permission **android.permission.INTERNET** in your **AndroidManifest.xml** file to allow your App internet access, which is needed for Applanga to function.
-
-    ```xml
-    <uses-permission android:name="android.permission.INTERNET" />
-    ```
 
 #### iOS
 
@@ -35,25 +25,16 @@ Add the *Applanga Settings File* to your android resources res/raw directory
  
 Add the *Applanga Settings File* to your apps resources. It will be automatically loaded.
 
-2. insert this line of code: `pod 'Applanga'` to your iOS podfile
-
-3. Once you have done so, re-run **pod install** from the command line.
-
 ### 2. Add applanga-react-native
 
  - `npm install applanga-react-native --save`
- - `npx react-native link applanga-react-native`
-
-For iOS, Add `pod 'ApplangaReactNative', :path => '../node_modules/applanga-react-native/ios/ApplangaReactNative.podspec'` to your podfile dependencies
-
-Then run pod install again
 
 
 ## Usage
 
 #### 0. The Example app
 
-In this repo you will find an example app named 'BasicExampleApp'. In this app you will find examples of all techniques explained below. We reccomend taking a look, particularly at the string file mapping and init process, before you start using the plugin in your own project. 
+In this repo you will find an example app named 'BasicExampleApp'. In this app you will find examples of all techniques explained below. We recommend taking a look, particularly at the string file mapping and init process, before you start using the plugin in your own project. 
 
 
 #### 1. Understanding the flow of the ApplangaSDK
@@ -68,7 +49,7 @@ If you wish to trigger an update, and pull the latest data, after the init proce
 
 `Applanga.update()`
 
-This fetches changes from the dashboard (of the current app language and the base language) and updates the local Applanga Database. You have to rerender your UI to see latest changes. Be aware that due to our CDN-Caching it can take up to 10 minutes before new translations are avalable from the dashboard.
+This fetches changes from the dashboard (of the current app language and the base language) and updates the local Applanga Database. You have to rerender your UI to see latest changes. Be aware that due to our CDN-Caching it can take up to 10 minutes before new translations are available from the dashboard.
 
 #### **Note**: *React Native bridge is asynchronous. So all Methods are asynchronous calls.*
 
@@ -112,7 +93,7 @@ You can get the localised value of a string Using the following method:
 
 If *string\_key* does not exists, *default\_message* gets uploaded to the applanga dashboard (See the Debug String Upload section of this doc for more info regarding string upload).
 
-As this call is async, it might not always be convinient, so we advise localising a map(json object), as explained in the next section. Check the BasicExampleApp in this repo for a good example of this.
+As this call is async, it might not always be convenient, so we advise localising a map(json object), as explained in the next section. Check the BasicExampleApp in this repo for a good example of this.
 
 #### 5. Get a String with arguments (New)
 
@@ -141,7 +122,7 @@ If *string\_key* does not exists, *default\_message* gets uploaded to the applan
 
 #### 6. Localize a Map
 
-With `async Applanga.localizeMap(map);` you can translate a collection of json objects all in one go. So an optimal setup would be to have the strings for each language in json objects (perhaps in seperate files) and then call Applanga.localizeMap on those objects after applanga has finished initialising. Then after that you can get the translations from those objects immidiatly instead of asynchronously.
+With `async Applanga.localizeMap(map);` you can translate a collection of json objects all in one go. So an optimal setup would be to have the strings for each language in json objects (perhaps in separate files) and then call Applanga.localizeMap on those objects after applanga has finished initialising. Then after that you can get the translations from those objects immediately instead of asynchronously.
 
 Like so:
 
@@ -160,7 +141,7 @@ Applanga.localizeMap(
 
 `Applanga.localizeMap(map)` returns the same map but with the actual Applanga localizations. 
 
-Check our ExampleApp included in this repo to see a clear and simple example of using localizeMap to translate all strings on startup and make them accessable syncronously.
+Check our ExampleApp included in this repo to see a clear and simple example of using localizeMap to translate all strings on startup and make them accessible synchronously.
 
 #### 7. Set Language
 
@@ -170,10 +151,14 @@ By Default, the ApplangaSDK will use the devices current language. But if you wi
 
 If you want to make sure that you have the very latest changes from the dashboard, then you should call `Applanga.update();` after setting the language as this will pull all the latest changes for the newly selected language.
 
+#### 8. Set Language and Update (Recommended)
 
-#### 8. Draft Mode & Localisation Screenshots
+This is the recommended option by the Applanga Team. Its combine the Set Language functionality to set the language manually and the Update functionality to get the the very latest changes from the dashboard. To use this method you should call `Applanga.SetLanguageAndUpdate(String Language);`
 
-To show the applanga [draft mode](https://www.applanga.com/docs/translation-management-dashboard/draft_on-device-testing) and screen shot menus you can either use the following methods, or follow the native documentation for each platform to implement showing the menues using gestures.
+
+#### 9. Draft Mode & Localisation Screenshots
+
+To show the applanga [draft mode](https://www.applanga.com/docs/translation-management-dashboard/draft_on-device-testing) and screen shot menus you can either use the following methods, or follow the native documentation for each platform to implement showing the menus using gestures.
 
 Show the applanga draft mode activation popup:
 
@@ -185,7 +170,18 @@ Show and hide the applanga screenshot and tag picker popup (Draft mode must be a
 
 You can read more about tags here : [Manage Tags](https://applanga.com/docs#manage_tags) and about screenshots here: 	[Uploading screenshots](https://applanga.com/docs#uploading_screenshots).
 
-#### 9. Debug String Upload
+##### Show Id Mode
+
+Enabling the applanga show id mode forces the sdk to return your string ids instead of string values, for all `getString()` or `localizeMap()` calls.
+This should not be used in production. It is especially useful for screenshots - as all strings will be tagged correctly even the dynamic strings and strings set at runtime.
+
+```
+Applanga.setShowIdModeEnabled(true);
+```
+
+After enabling the show id mode you have to call `localizeMap()`  again and you have to refresh your view tree with `setState()`.
+
+#### 10. Debug String Upload
 
 Strings from `Applanga.getString(String, String)` and Strings which are located in the map of `Applanga.localizeMap(map)`, will be uploaded if the app is in debug mode and fulfill one of the two points: They are non existent on the Applanga Dashboard or the target text is empty.
 ##### Debug mode for iOS

@@ -33,6 +33,16 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     public String getName() {
         return "Applanga";
     }
+
+    @ReactMethod
+    public void setShowIdModeEnabled(boolean enabled, final Promise promise){
+        try{
+            Applanga.setShowIdModeEnabled(enabled);
+            promise.resolve(null);
+        } catch (Exception error){
+            promise.reject(error);
+        }
+    }
     
     @ReactMethod
     public void showDraftModeDialog(final Promise promise){
@@ -78,6 +88,20 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     public void setLanguage(String lang, Promise promise){
         try {
             promise.resolve(Applanga.setLanguage(lang));          
+        } catch(Exception error) {
+            promise.reject(TAG, error.getMessage(), error);  
+        }
+    }
+
+    @ReactMethod
+    public void setLanguageAndUpdate(String lang, final Promise promise){
+        try {
+            Applanga.setLanguageAndUpdate(lang, new ApplangaCallback() {
+                @Override
+                public void onLocalizeFinished(boolean succeeded) {
+                    promise.resolve(succeeded);
+                }
+            });          
         } catch(Exception error) {
             promise.reject(TAG, error.getMessage(), error);  
         }

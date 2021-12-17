@@ -31,13 +31,16 @@
 
 + (NSDictionary*) localizedStringsForCurrentLanguage;
 
-
 + (void)updateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
 
++ (void)setShowIdModeEnabled:(BOOL)enabled;
 + (void)showDraftModeDialog;
+
 + (BOOL)setScreenShotMenuVisible:(BOOL)visible;
 
 + (BOOL)setLanguage:(NSString*)language;
+
++ (void)setLanguageAndUpdate:(NSString*)language withCompletionHandler:(void (^)(BOOL success))completionHandler;
 
 @end
 
@@ -126,8 +129,24 @@ RCT_REMAP_METHOD(setLanguage,
     resolve(result);
 }
 
+RCT_REMAP_METHOD(setLanguageAndUpdate,
+                 language: (NSString *)language
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+                 {
+                    [Applanga setLanguageAndUpdate:language withCompletionHandler:^(BOOL success) {
+                        NSNumber *result=[NSNumber numberWithBool:success];
+                        resolve(result);
+                    }];
+}
 
-
+RCT_REMAP_METHOD(setShowIdModeEnabled, 
+                 enabled: (BOOL)enabled
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject){
+    [Applanga setShowIdModeEnabled:enabled];
+    resolve(nil);
+}
 
 RCT_EXPORT_METHOD(showDraftModeDialog)
 {
