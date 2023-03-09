@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "applanga-react-native": "file:../applanga-react-native-0.0.34.tgz",
+    "applanga-react-native": "0.0.35",
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-eject": "^0.2.0"
