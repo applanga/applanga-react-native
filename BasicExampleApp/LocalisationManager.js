@@ -33,8 +33,6 @@ async function initLocalisations(callback) {
   } catch (e) {
     console.error(e);
   }
-
-  callback();
 }
 
 // this method only works aynchronously

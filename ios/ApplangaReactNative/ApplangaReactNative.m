@@ -157,13 +157,16 @@ RCT_EXPORT_METHOD(showDraftModeDialog)
 
 RCT_EXPORT_METHOD(showScreenShotMenu)
 {
-    [Applanga setScreenShotMenuVisible:true];
+    dispatch_sync(dispatch_get_main_queue(),  ^{
+        [Applanga setScreenShotMenuVisible:true];
+    });
 }
 
 RCT_EXPORT_METHOD(hideScreenShotMenu)
 {
-    [Applanga setScreenShotMenuVisible:false];
-    
+    dispatch_sync(dispatch_get_main_queue(),  ^{
+        [Applanga setScreenShotMenuVisible:false];
+    });
 }
 
 @end
