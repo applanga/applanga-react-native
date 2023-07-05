@@ -1,6 +1,7 @@
 package com.applanga.android.react;
 
 import com.applanga.android.ApplangaCallback;
+import com.applanga.android.$InternalALPlugin;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -144,7 +145,7 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     public void localizedStringsForCurrentLanguage(Promise promise){
 
         try {
-            Map<String,String> map = Applanga.localizedStringsForCurrentLanguage();
+            Map<String,String> map = $InternalALPlugin.localizedStringsForCurrentLanguage();
             Iterator it = map.keySet().iterator();
             WritableMap writableMap = Arguments.createMap();
             while(it.hasNext()){

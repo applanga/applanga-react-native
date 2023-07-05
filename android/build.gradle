@@ -22,7 +22,6 @@ android {
 
 repositories {
     maven { url 'https://maven.applanga.com/'}
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {

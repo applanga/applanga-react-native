@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {Applanga} from 'applanga-react-native';
 import {
@@ -89,9 +89,19 @@ function App(): JSX.Element {
     setApplangaInitialized(true);
   }
 
-  initLocalisations(() => {
-    updateStrings();
-  });
+  useEffect(() => {
+    const _updateStrings = updateStrings;
+    const _init = async () => {
+      console.log("_init");
+      try {
+        await initLocalisations();
+        _updateStrings();
+      } catch (e) {
+        console.log("Couldn't init localisations");
+      }
+    };
+    _init();
+  }, []);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,

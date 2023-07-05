@@ -7,6 +7,7 @@ import {Applanga} from 'applanga-react-native';
 var translationMap = en;
 
 async function initLocalisations(callback) {
+  console.log("Applanga.update()");
   try {
     // call Applanga.localizeMap once so it will upload all new strings
     // to the applanga dashboard
