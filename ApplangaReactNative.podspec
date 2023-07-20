@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
   #}
 
   #s.dependency 'React'
-  s.dependency 'Applanga'
+  s.dependency 'Applanga', '2.0.174'
   s.dependency 'React'
 end

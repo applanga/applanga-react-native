@@ -48,7 +48,12 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void showDraftModeDialog(final Promise promise){
         try{
-            Applanga.showDraftModeDialog(getCurrentActivity());
+            getCurrentActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Applanga.showDraftModeDialog(getCurrentActivity());
+                }
+            });
             promise.resolve(null);
         } catch (Exception error){
             promise.reject(error);
