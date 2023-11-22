@@ -22,10 +22,9 @@ android {
 
 repositories {
     maven { url 'https://maven.applanga.com/'}
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
   implementation "com.facebook.react:react-native:+"
-  implementation "com.applanga.android:Applanga:3.0.167"
+  implementation "com.applanga.android:Applanga:4.0.194"
 }

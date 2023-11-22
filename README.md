@@ -189,3 +189,22 @@ Open your ios/\*.xcodeproj or ios/\*.xcworkspace in XCode and run your app.
 
 ##### Debug mode for Android
 Open Android Studio, File - Open. android/ directory. Run "Debug 'app'".
+
+## Branching
+
+If your project is a branching project use at least SDK version 0.0.36 and update your settings files.
+The settings file defines the default branch for your current app.
+This branch is used on app start and for update calls.
+To be sure branching is working look for the log line: `Branching is enabled.`
+
+To learn more about branching please have a look [here](https://www.applanga.com/docs/advanced-features/branching).
+
+### Draft Mode
+
+When enabling the Draft Mode you can switch your branch at runtime - an app restart is required.
+You also can use our draft overlay to switch your current branch.
+Every screenshot you take is linked to the current branch.
+
+### Production Apps
+
+Already published apps that still use settings files without branching and older SDKs will still work and they will use the default branch defined on the Applanga dashboard.
