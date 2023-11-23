@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 29
-  buildToolsVersion "29.0.3"
   publishNonDefault true
 
   defaultConfig {
+    compileSdk rootProject.ext.compileSdkVersion
     minSdkVersion 16
-    targetSdkVersion 29
+    targetSdkVersion rootProject.ext.targetSdkVersion
   }
 
   lintOptions {
@@ -26,5 +25,6 @@ repositories {
 
 dependencies {
   implementation "com.facebook.react:react-native:+"
+  //noinspection ApplangaPlugin
   implementation "com.applanga.android:Applanga:4.0.194"
 }
