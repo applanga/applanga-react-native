@@ -5,7 +5,7 @@
 *Applanga React Native Documentation:* https://www.applanga.com/docs/integration-documentation/react-native
 ***
 
-## Version 0.0.36 (20 Jul 2023) 
+## Version 0.0.37 (23 Nov 2023) 
 - Added branching support
 
 ## Version 0.0.35 (9 Mar 2023) 
