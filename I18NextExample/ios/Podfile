@@ -28,7 +28,7 @@ end
 target 'I18NextExample' do
   config = use_native_modules!
 
-  pod 'Applanga', :path => '/Users/alec/projects/applanga/applanga-web/sdk/ios/applanga'
+  pod 'Applanga'
 
   use_react_native!(
     :path => config[:reactNativePath],

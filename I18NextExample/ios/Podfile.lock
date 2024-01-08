@@ -1,7 +1,7 @@
 PODS:
-  - Applanga (2.0.999)
+  - Applanga (2.0.177)
   - ApplangaReactNative (0.0.38):
-    - Applanga
+    - Applanga (= 2.0.177)
     - React
   - boost (1.83.0)
   - CocoaAsyncSocket (7.6.5)
@@ -1119,7 +1119,7 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - Applanga (from `/Users/alec/projects/applanga/applanga-web/sdk/ios/applanga`)
+  - Applanga
   - ApplangaReactNative (from `../node_modules/applanga-react-native`)
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -1197,6 +1197,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Applanga
     - CocoaAsyncSocket
     - Flipper
     - Flipper-Boost-iOSX
@@ -1212,8 +1213,6 @@ SPEC REPOS:
     - SocketRocket
 
 EXTERNAL SOURCES:
-  Applanga:
-    :path: "/Users/alec/projects/applanga/applanga-web/sdk/ios/applanga"
   ApplangaReactNative:
     :path: "../node_modules/applanga-react-native"
   boost:
@@ -1315,9 +1314,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Applanga: 768fdd1a20ffecc86e51560a41533b931898d2e9
-  ApplangaReactNative: 28eaeed9aefc6dca23be9c25af106f3558857a38
-  boost: 26fad476bfa736552bbfa698a06cc530475c1505
+  Applanga: a2472fee1524ce865666090ce21038efbf6ddf24
+  ApplangaReactNative: 6273fe16e31859936e0625909314cd577f5aa755
+  boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
   FBLazyVector: 39ba45baf4e398618f8b3a4bb6ba8fcdb7fc2133
@@ -1379,6 +1378,6 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 44003f970aa541b79dfdd59cf236fda41bd5890f
 
-PODFILE CHECKSUM: 5c00a158d331a7a41e9d9664bc4fe63d2c4f3264
+PODFILE CHECKSUM: 6dd8eaf518fbd104b802526af9bc5a87db96fd84
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0
