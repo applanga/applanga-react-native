@@ -73,18 +73,14 @@ function App(): React.JSX.Element {
   };
 
   const _init = async () => {
-    console.log('_init');
     var success = false;
     try {
       await initApplangaLocalisations();
-      // _updateStrings();
       success = true;
     } catch (e) {
       console.log("Couldn't init localisations");
       console.log(e);
     }
-    console.log('Setting applangaInitialized to ' + success);
-    //() => setApplangaInitialized(success);
     if (success) {
       setApplangaInitialized(success);
     }

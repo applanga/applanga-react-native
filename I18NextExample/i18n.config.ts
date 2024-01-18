@@ -14,6 +14,9 @@ var resources = {
   },
 };
 
+/**
+ * Initialize i18n with the given languages and translations
+ */
 async function initLocalisations(): Promise<void> {
   await i18n.use(initReactI18next).init({
     resources,
@@ -25,19 +28,20 @@ async function initLocalisations(): Promise<void> {
   });
 }
 
+/**
+ * Here we add we pass all our translations to Applanga and we get back our
+ * over-the-air translated strings.
+ * Now we feed i18n with those strings, so that we can use them in our app.
+ */
 async function initApplangaLocalisations(): Promise<void> {
-  console.log('initLocalisations');
   try {
-    console.log('localizeMapI18NextJsonV4');
     let m = {
       en: en,
       de: de,
     };
-    console.log(m);
-    var map = await Applanga.localizeMapI18NextJsonV4(m);
-    console.log(map);
 
     await Applanga.update(['en', 'de']);
+    var map = await Applanga.localizeMapI18NextJsonV4(m);
 
     resources = {
       en: {
@@ -47,16 +51,9 @@ async function initApplangaLocalisations(): Promise<void> {
         translation: map.de,
       },
     };
-    console.log('initLocalisations2');
-
-    // console.log(resources.en);
-    // console.log(resources.de);
-    console.log(map.en);
-    console.log(map.de);
     i18n.addResourceBundle('en', 'translation', resources.en.translation);
     i18n.addResourceBundle('de', 'translation', resources.de.translation);
     i18n.changeLanguage(i18n.language);
-    console.log('initLocalisations3');
   } catch (e) {
     console.error(e);
   }
