@@ -29,9 +29,13 @@
 
 + (NSDictionary*) localizeMap:(NSDictionary*)map;
 
++ (NSDictionary*) localizeMapI18NextJsonV4:(NSDictionary*)map;
+
 + (NSDictionary*) localizedStringsForCurrentLanguage;
 
 + (void)updateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
+
++ (void)updateGroups:(NSArray*)groups andLanguages:(NSArray*)languages withCompletionHandler:(void (^)(BOOL success))completionHandler;
 
 + (void)setShowIdModeEnabled:(BOOL)enabled;
 + (void)showDraftModeDialog;
@@ -103,6 +107,104 @@ RCT_REMAP_METHOD(localizeMap,
     resolve([Applanga localizeMap: map]);
 }
 
+RCT_REMAP_METHOD(localizeMapI18NextJsonV4,
+                 m:(NSDictionary *)m
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    NSEnumerator *enumerator = [m keyEnumerator];
+    NSMutableDictionary<NSString *, NSMutableDictionary<NSString *, NSString *> *> *cleaneadMap = [NSMutableDictionary dictionary];
+    
+    NSString *lang;
+    while ((lang = [enumerator nextObject])) {
+        NSDictionary *langMap = [m objectForKey:lang];
+        if (!langMap) continue;
+        
+        NSEnumerator *langMapEnumerator = [langMap keyEnumerator];
+        NSMutableDictionary<NSString *, NSString *> *langHashMap = [NSMutableDictionary dictionary];
+        
+        NSString *id;
+        while ((id = [langMapEnumerator nextObject])) {
+            NSString *value = [langMap objectForKey:id] ;
+            NSString *transformedId = id;
+            NSError *error = NULL;
+            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(.*)_(zero|one|two|few|many|other)$" options:NSRegularExpressionCaseInsensitive error:&error];
+            NSTextCheckingResult *match = [regex firstMatchInString:id options:0 range:NSMakeRange(0, [id length])];
+            
+            if (match) {
+                transformedId = [NSString stringWithFormat:@"%@[%@]", [id substringWithRange:[match rangeAtIndex:1]], [id substringWithRange:[match rangeAtIndex:2]]];
+            }
+            
+            if ([value isKindOfClass:[NSString class]]) {
+                NSString *value = [langMap objectForKey:id];
+                [langHashMap setObject:value forKey:transformedId];
+            } else if ([value isKindOfClass:[NSArray class]]) {
+                NSArray *array = [langMap objectForKey:id];
+                if (!array) continue;
+                
+                for (NSUInteger i = 0; i < [array count]; i++) {
+                    NSString *value = [array objectAtIndex:i];
+                    NSString *arrayId = [NSString stringWithFormat:@"%@[%lu]", id, (unsigned long)i];
+                    [langHashMap setObject:value forKey:arrayId];
+                }
+            }
+        }
+        [cleaneadMap setObject:langHashMap forKey:lang];
+    }
+    
+    // get the map from applanga back
+    NSDictionary* updatedMap = [[Applanga localizeMap: cleaneadMap] mutableCopy];
+    NSMutableDictionary* transformedUpdatedMap = [NSMutableDictionary dictionary];
+    
+    for (NSString *langKey in updatedMap) {
+        NSMutableDictionary<NSString *, NSObject *> *writableMapLang = [NSMutableDictionary dictionary];
+        NSMutableDictionary<NSString *, NSMutableArray<NSString *> *> *arrayMap = [NSMutableDictionary dictionary];
+        
+        NSDictionary<NSString *, NSString *> *lang = updatedMap[langKey];
+        
+        for (NSString *stringKey in lang) {
+            NSString *value = lang[stringKey];
+            
+            NSString *id = stringKey;
+            NSString *transformedId = id;
+            
+            NSRegularExpression *pluralsRegex = [NSRegularExpression regularExpressionWithPattern:@"(.*)\\[(zero|one|two|few|many|other)\\]$" options:0 error:nil];
+            NSTextCheckingResult *pluralsMatch = [pluralsRegex firstMatchInString:id options:0 range:NSMakeRange(0, id.length)];
+            
+            if (pluralsMatch) {
+                transformedId = [NSString stringWithFormat:@"%@_%@", [id substringWithRange:[pluralsMatch rangeAtIndex:1]], [id substringWithRange:[pluralsMatch rangeAtIndex:2]]];
+                writableMapLang[transformedId] = value;
+                continue;
+            }
+            
+            NSRegularExpression *arrayRegex = [NSRegularExpression regularExpressionWithPattern:@"(.*)\\[(\\d+)\\]$" options:0 error:nil];
+            NSTextCheckingResult *arrayMatch = [arrayRegex firstMatchInString:id options:0 range:NSMakeRange(0, id.length)];
+            
+            if (arrayMatch) {
+                transformedId = [id substringWithRange:[arrayMatch rangeAtIndex:1]];
+                
+                if (!transformedId) {
+                    NSLog(@"LocalizeMap transformedId is null");
+                    continue;
+                }
+                
+                if (!arrayMap[transformedId]) {
+                    arrayMap[transformedId] = [NSMutableArray arrayWithObject:value];
+                } else {
+                    [arrayMap[transformedId] addObject:value];
+                }
+                continue;
+            }
+            writableMapLang[transformedId] = value;
+        }
+        for (NSString *arrayKey in arrayMap) {
+            writableMapLang[arrayKey] = arrayMap[arrayKey];
+        }
+        transformedUpdatedMap[langKey] = writableMapLang;
+    }
+    resolve(transformedUpdatedMap);
+}
+
 RCT_REMAP_METHOD(localizedStringsForCurrentLanguage,
                  findEventsWthResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
@@ -117,6 +219,17 @@ RCT_REMAP_METHOD(update,
     [Applanga updateWithCompletionHandler:^(BOOL success) {
         NSNumber *result=[NSNumber numberWithBool:success];
         
+        resolve(result);
+    }];
+}
+
+RCT_REMAP_METHOD(update,
+                 languages: (NSArray*) languages
+                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    [Applanga updateGroups:nil andLanguages:languages withCompletionHandler:^(BOOL success) {
+        NSNumber *result=[NSNumber numberWithBool:success];
         resolve(result);
     }];
 }

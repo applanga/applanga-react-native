@@ -1,0 +1,11 @@
+{
+    "test-1": "Hello Example",
+    "buying-apples_one": "I buy one apple",
+    "buying-apples_other": "I buy two apples",
+    "buying-apples_zero": "I don't buy apples",
+    "some_array-here": [
+        "one",
+        "two",
+        "three"
+    ]
+}
