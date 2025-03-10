@@ -1,3 +1,4 @@
 rootProject.name = 'applanga-react-native'
 include ":applanga-react-native"
 project(":applanga-react-native").projectDir = file("./android")
+includeBuild('node_modules/@react-native/gradle-plugin')

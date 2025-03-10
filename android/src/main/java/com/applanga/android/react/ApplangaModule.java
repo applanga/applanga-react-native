@@ -139,24 +139,12 @@ public class ApplangaModule extends ReactContextBaseJavaModule {
     }
     
     @ReactMethod
-    public void update(final Promise promise) {
-        try {
-            Applanga.update(new ApplangaCallback() {
-                @Override
-                public void onLocalizeFinished(boolean succeeded) {
-                    promise.resolve(succeeded);
-                }
-            });
-        } catch (Exception error) {
-            promise.reject(TAG, error.getMessage(), error);
-        }
-    }
-    
-    @ReactMethod
     public void update(ReadableArray languages, final Promise promise) {
         ArrayList<String> langs = new ArrayList<>();
-        for (int i = 0; i < languages.size(); i++) {
-            langs.add(languages.getString(i));
+        if (languages != null) {
+            for (int i = 0; i < languages.size(); i++) {
+                langs.add(languages.getString(i));
+            }
         }
         try {
             Applanga.update(null, langs,
