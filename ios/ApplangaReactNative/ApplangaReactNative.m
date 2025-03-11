@@ -213,17 +213,6 @@ RCT_REMAP_METHOD(localizedStringsForCurrentLanguage,
 }
 
 RCT_REMAP_METHOD(update,
-                 findEventsWithResolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
-{
-    [Applanga updateWithCompletionHandler:^(BOOL success) {
-        NSNumber *result=[NSNumber numberWithBool:success];
-        
-        resolve(result);
-    }];
-}
-
-RCT_REMAP_METHOD(update,
                  languages: (NSArray*) languages
                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
