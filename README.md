@@ -34,9 +34,21 @@ Add the *Applanga Settings File* to your Android resources res/raw directory.
 
 1. Download the *Applanga Settings File* for your app from the App Overview in the dashboard by clicking the ***[Prepare Release]*** button and then clicking ***[Get Settings File]***.
  
-3. Add the *Applanga Settings File* to your app's resources. It will be automatically loaded.
+2. Add the *Applanga Settings File* to your app's resources. It will be automatically loaded.
 
-2. Add applanga-react-native: `npm install applanga-react-native --save`
+3. Disable automatic string update on init
+
+The iOS SDK does an automatic string update on app launch. This is not necessary with `applanga-react-native` as the string update should be done by your React Native code.
+Set the following to your `Info.plist`:
+```
+...
+<key>ApplangaInitialUpdate</key>
+<false/>
+...
+```
+
+
+4. Add applanga-react-native: `npm install applanga-react-native --save`
 
 
 ## Usage
