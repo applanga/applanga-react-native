@@ -50,6 +50,11 @@ Set the following to your `Info.plist`:
 
 4. Add applanga-react-native: `npm install applanga-react-native --save`
 
+> [!IMPORTANT]
+> The native iOS SDK performs an automatic `Applagna.update()` on app launch.
+Your RN code should be doing that manually before presenting the UI.
+**To disable the automatic update**:
+in your project `Info.plist`, add the following key `ApplangaInitialUpdate` with `NO`.
 
 ## Usage
 
