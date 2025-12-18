@@ -5,17 +5,23 @@
 *Applanga React Native Documentation:* https://www.applanga.com/docs/integration-documentation/react-native
 ***
 
+## Version 0.0.42 (18 Dec 2025) 
+### Fixed
+* skip native iOS SDK automatic Applanga.update() when the AppDelegate implements RCTAppDelegate
+
+---
 ## Version 0.0.41 (17 Jul 2025) 
 ### Fixed
 * bumped Applanga Android and iOS SDK version
 
---- 
+---
 ## Version 0.0.40 (11 Mar 2025) 
 ### Fixed
 - iOS and Android issues with latest RN versions
 ### Added
 - upgraded I18NextExample
 
+---
 ## Version 0.0.39 (15 Feb 2024) 
 ### Added
 - i18n pluralization support
