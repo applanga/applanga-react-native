@@ -1,6 +1,6 @@
 {
   "name": "applanga-react-native",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "Applanga's SDK for React-Native",
   "homepage": "https://github.com/applanga/applanga-react-native",
   "main": "index.js",
