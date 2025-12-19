@@ -5,7 +5,7 @@
 *Applanga React Native Documentation:* https://www.applanga.com/docs/integration-documentation/react-native
 ***
 
-## Version 0.0.44 (19 Dec 2025) 
+## Version 0.0.45 (19 Dec 2025) 
 ### Fixed
 * skip native iOS SDK automatic Applanga.update() when the AppDelegate implements RCTAppDelegate
 
