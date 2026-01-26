@@ -10,24 +10,24 @@
     "test": "jest"
   },
   "dependencies": {
-    "applanga-react-native": "^0.0.39",
+    "applanga-react-native": "^0.0.46",
     "i18next": "^23.7.8",
     "intl-pluralrules": "^2.0.1",
     "react": "19.0.0",
     "react-i18next": "^13.5.0",
-    "react-native": "0.78.0"
+    "react-native": "0.79.7"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
-    "@react-native-community/cli": "15.0.1",
-    "@react-native-community/cli-platform-android": "15.0.1",
-    "@react-native-community/cli-platform-ios": "15.0.1",
-    "@react-native/babel-preset": "0.78.0",
-    "@react-native/eslint-config": "0.78.0",
-    "@react-native/metro-config": "0.78.0",
-    "@react-native/typescript-config": "0.78.0",
+    "@react-native-community/cli": "18.0.1",
+    "@react-native-community/cli-platform-android": "18.0.1",
+    "@react-native-community/cli-platform-ios": "18.0.1",
+    "@react-native/babel-preset": "0.79.7",
+    "@react-native/eslint-config": "0.79.7",
+    "@react-native/metro-config": "0.79.7",
+    "@react-native/typescript-config": "0.79.7",
     "@types/jest": "^29.5.13",
     "@types/react": "^19.0.0",
     "@types/react-test-renderer": "^19.0.0",

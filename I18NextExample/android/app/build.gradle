@@ -84,6 +84,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     signingConfigs {
         debug {
@@ -106,6 +107,7 @@ android {
         }
     }
 }
+
 repositories {
     maven { url 'https://maven.applanga.com/'}
 }
