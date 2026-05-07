@@ -5,6 +5,12 @@
 *Applanga React Native Documentation:* https://www.applanga.com/docs/integration-documentation/react-native
 ***
 
+## Version 0.0.48 (7 May 2026)
+### Fixed
+* skip native iOS SDK automatic Applanga.update() also when the AppDelegate implements RCTDefaultReactNativeFactoryDelegate
+* skip native iOS SDK automatic Applanga.update() when during app launch the root view is RCTRootView
+
+---
 ## Version 0.0.46 (19 Dec 2025) 
 ### Fixed
 * skip native iOS SDK automatic Applanga.update() when the AppDelegate implements RCTAppDelegate
