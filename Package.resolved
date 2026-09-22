@@ -1,0 +1,15 @@
+{
+  "originHash" : "3a17faa8d9337b865b81a08009fc4d4b1c1cc64ac196954bb109e605edd45ecb",
+  "pins" : [
+    {
+      "identity" : "sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/applanga/sdk-ios",
+      "state" : {
+        "revision" : "2cbb7227b6406d8b0e186202c18c89434eb3706d",
+        "version" : "2.0.228"
+      }
+    }
+  ],
+  "version" : 3
+}

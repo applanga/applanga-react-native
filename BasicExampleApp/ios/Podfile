@@ -16,15 +16,11 @@ end
 
 target 'Example' do
   config = use_native_modules!
-  
-  pod 'RCT-Folly', :podspec => '../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec'
 
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
-    :app_path => "#{Pod::Config.instance.installation_root}/..",
-    :new_arch_enabled => false,
-    :fabric_enabled => false
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
   post_install do |installer|
@@ -33,15 +29,6 @@ target 'Example' do
       config[:reactNativePath],
       :mac_catalyst_enabled => false
     )
-
-    installer.pods_project.targets.each do |t|
-      if t.name == 'RCT-Folly'
-        t.build_configurations.each do |conf|
-          conf.build_settings['OTHER_CPLUSPLUSFLAGS'] ||= ['$(inherited)']
-          conf.build_settings['OTHER_CPLUSPLUSFLAGS'] << '-DFOLLY_CFG_NO_COROUTINES=1'
-        end
-      end
-    end
   end
 
 end

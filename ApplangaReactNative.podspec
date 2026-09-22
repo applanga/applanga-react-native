@@ -14,15 +14,18 @@ Pod::Spec.new do |s|
   s.platforms           = { :ios => "9.0", :tvos => "9.2" }
   s.source              = {:git => 'https://github.com/applanga/sdk-ios' }#:git => "http://EXAMPLE/applanga-react-native.git", :tag => "#{s.version}" }
   
-  s.source_files        = 'ios/ApplangaReactNative/**/*.{h,m}'
+  s.source_files        = 'ios/ApplangaReactNative/**/*.{h,m,mm}'
   s.public_header_files = 'ios/ApplangaReactNative/*.h'
-  s.preserve_paths = 'ios/ApplangaReactNative/**/*.{h,m}', 'README.md', 'LICENSE', 'package.json', '*.js'
-  #s.preserve_paths      = 'README.md', 'LICENSE', 'package.json', '*.js'
+  s.preserve_paths = 'ios/ApplangaReactNative/**/*.{h,m,mm}', 'README.md', 'LICENSE', 'package.json', '*.js', '*.ts'
   #s.ios.xcconfig = {
   #  'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/Applanga/Applanga.framework/**"'
   #}
 
-  #s.dependency 'React'
   s.dependency 'Applanga', '2.0.228'
-  s.dependency 'React'
+
+  if respond_to?(:install_modules_dependencies, true)
+    install_modules_dependencies(s)
+  else
+    s.dependency 'React'
+  end
 end

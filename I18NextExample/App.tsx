@@ -18,16 +18,17 @@ import {
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 import {initLocalisations, initApplangaLocalisations} from './i18n.config';
 import LanguagePicker from './LanguagePicker';
+
+const Colors = {
+  white: '#FFF',
+  lighter: '#F3F3F3',
+  light: '#DAE1E7',
+  dark: '#444',
+  darker: '#222',
+  black: '#000',
+};
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -99,14 +100,10 @@ function App(): React.JSX.Element {
   } else {
     return (
       <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={backgroundStyle}>
-          <Header />
           <View
             style={{
               backgroundColor: isDarkMode ? Colors.black : Colors.white,
