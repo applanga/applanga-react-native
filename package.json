@@ -5,6 +5,16 @@
   "homepage": "https://github.com/applanga/applanga-react-native",
   "main": "index.js",
   "scripts": {},
+  "codegenConfig": {
+    "name": "ApplangaSpec",
+    "type": "modules",
+    "jsSrcsDir": ".",
+    "ios": {
+      "modulesProvider": {
+        "Applanga": "ApplangaReactNative"
+      }
+    }
+  },
   "keywords": [
     "Android",
     "iOS",

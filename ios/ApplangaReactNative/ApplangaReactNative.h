@@ -27,6 +27,11 @@
 #import "React/RCTBridgeModule.h"
 #endif
 
+#ifdef RCT_NEW_ARCH_ENABLED
+#import "ApplangaSpec.h"
 
+@interface ApplangaReactNative : NSObject <NativeApplangaSpec>
+#else
 @interface ApplangaReactNative : NSObject <RCTBridgeModule>
+#endif
 @end

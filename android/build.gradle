@@ -1,4 +1,11 @@
+def isNewArchitectureEnabled() {
+  return rootProject.hasProperty("newArchEnabled") && rootProject.getProperty("newArchEnabled") == "true"
+}
+
 apply plugin: 'com.android.library'
+if (isNewArchitectureEnabled()) {
+  apply plugin: 'com.facebook.react'
+}
 
 android {
   publishNonDefault true
@@ -16,6 +23,12 @@ android {
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_7
     targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  sourceSets {
+    main {
+      java.srcDirs += [isNewArchitectureEnabled() ? "src/newarch/java" : "src/oldarch/java"]
+    }
   }
 }
 

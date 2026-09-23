@@ -56,6 +56,12 @@ Your RN code should be doing that manually before presenting the UI.
 **To disable the automatic update**:
 in your project `Info.plist`, add the following key `ApplangaInitialUpdate` with `NO`.
 
+### New Architecture (TurboModules) Support
+
+This library works with both React Native's legacy architecture and the New Architecture (TurboModules) on iOS and Android. It links itself according to whichever architecture your app is already built with (`newArchEnabled` on Android, `RCT_NEW_ARCH_ENABLED` on iOS).
+
+Apps on the New Architecture additionally get a synchronous `Applanga.getLocalizedValue()` method — see [Get a String synchronously](#get-a-string-synchronously-new-architecture-only) below. That method isn't available on the legacy architecture, since a true synchronous native call requires JSI. Check the `TurboModuleExampleApp` in this repo for a working example.
+
 ## Usage
 
 ### The Example app
@@ -121,6 +127,16 @@ You can get the localised value of a string Using the following method:
 If *string\_key* does not exists, *default\_message* gets uploaded to the applanga dashboard (See the Debug String Upload section of this doc for more info regarding string upload).
 
 As this call is async, it might not always be convenient, so we advise localising a map(json object), as explained in the next section. Check the BasicExampleApp in this repo for a good example of this.
+
+### Get a String synchronously (New Architecture only)
+
+Apps running React Native's New Architecture (TurboModules) can call:
+
+`Applanga.getLocalizedValue("string_key", "default_message")`
+
+This returns the localised string directly, with no `Promise`/`await` needed. It behaves exactly like `getString`, including the same string-upload behavior for a missing key, just without the async round trip. Check the TurboModuleExampleApp in this repo for a working example.
+
+This method is only available when the app has the New Architecture enabled — synchronous native calls require it. On the legacy architecture the method doesn't exist on the native module; use `getString` there.
 
 ### Get a String with arguments (New)
 

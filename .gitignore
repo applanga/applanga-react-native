@@ -30,6 +30,10 @@ Pods/
 build/
 lib/
 
+# Swift Package Manager
+.build/
+.swiftpm/
+
 applanga*.tgz
 
 # Applanga
